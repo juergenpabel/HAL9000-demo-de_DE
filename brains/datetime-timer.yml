@@ -1,0 +1,19 @@
+---
+  - name: "datetime-timer"
+    signals:
+      - order: "erinnere mich in {{timer_minutes}} minuten"
+      - order: "mach eine erinnerung für in {{timer_minutes}} minuten"
+    neurons:
+      - neurotimer:
+          minutes: "{{timer_minutes}}"
+          synapse: "datetime-timer-finished"
+      - say:
+          message: "ich werde mich in {{timer_minutes}} minuten melden"
+
+  - name: "datetime-timer-finished"
+    signals:
+      - order: ""
+    neurons:
+      - say:
+          message: "die {{timer_minutes}} minuten sind abgelaufen"
+

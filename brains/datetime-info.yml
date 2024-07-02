@@ -1,0 +1,21 @@
+---
+
+  - name: "datetime-info-time"
+    signals:
+      - order: "Wie spät ist es"
+      - order: "Wieviel Uhr haben wir"
+      - order: "Wie viel Uhr haben wir"
+    neurons:
+      - systemdate:
+          file_template: "templates/datetime-info-time.j2"
+
+  - name: "datetime-info-date"
+    signals:
+      - order: "Welcher Tag ist heute"
+      - order: "Welchen Tag haben wir"
+      - order: "Welches Datum ist heute"
+      - order: "Welches Datum haben wir"
+    neurons:
+      - systemdate:
+          file_template: "templates/datetime-info-date.j2"
+

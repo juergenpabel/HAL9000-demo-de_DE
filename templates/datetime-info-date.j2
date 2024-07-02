@@ -1,0 +1,50 @@
+{% set day_of_week = {
+    "0": "Sonntag",
+    "1": "Montag",
+    "2": "Dienstag",
+    "3": "Mittwoch",
+    "4": "Donnerstag",
+    "5": "Freitag",
+    "6": "Samstag"
+    }[weekday] | default("")
+-%}
+
+{% set month_word = {"01": "Januar", "02": "Februar", "03": "März", "04": "April", "05": "Mai", "06": "Juni", "07": "Juli", "08": "August", "09": "September", "10": "Oktober", "11": "November", "12": "Dezember"}[month] | default("") -%}
+
+{% set day_month_formated = {
+    "01": "erste",
+    "02": "zweite",
+    "03": "dritte",
+    "04": "vierte",
+    "05": "fünfte",
+    "06": "sechste",
+    "07": "siebte",
+    "08": "achte",
+    "09": "neunte",
+    "10": "zehnte",
+    "11": "elfte",
+    "12": "zwölfte",
+    "13": "dreizehnte",
+    "14": "vierzehnte",
+    "15": "fünfzehnte",
+    "16": "sechszehnte",
+    "17": "siebzehnte",
+    "18": "achtzehnte",
+    "19": "neunzehnte",
+    "20": "zwanzigste",
+    "21": "einundzwanzigste",
+    "22": "zweiundzwanzigste",
+    "23": "dreiundzwanzigste",
+    "24": "vierundzwanzigste",
+    "25": "fünfundzwanzigste",
+    "26": "sechsundzwanzigste",
+    "27": "siebenundzwanzigste",
+    "28": "achtundzwanzigste",
+    "29": "neunundzwanzigste",
+    "30": "dreißiegste",
+    "31": "einunddreißigste",
+
+}[day_month] | default("") -%}
+
+Es ist {{ day_of_week }} der {{ day_month_formated }} {{ month_word }} {{ year }}
+

@@ -1,0 +1,24 @@
+[submodule "stt-vosk"]
+	path = resources/stt/vosk
+	url = https://github.com/juergenpabel/kalliope_stt_vosk.git
+	branch = master
+[submodule "trigger-mqtt"]
+	path = resources/triggers/mqtt
+	url = https://github.com/juergenpabel/kalliope_trigger_mqtt.git
+	branch = master
+[submodule "trigger-multiplexer"]
+	path = resources/triggers/multiplexer
+	url = https://github.com/juergenpabel/kalliope_trigger_multiplexer.git
+	branch = master
+[submodule "trigger-openwakeword"]
+	path = resources/triggers/openwakeword
+	url = https://github.com/juergenpabel/kalliope_trigger_openwakeword.git
+	branch = master
+[submodule "signal-hal9000"]
+	path = resources/signals/hal9000
+	url = https://github.com/juergenpabel/kalliope_signal_hal9000.git
+	branch = master
+[submodule "neuron-normalizedvolume"]
+	path = resources/neurons/normalizedvolume
+	url = https://github.com/juergenpabel/kalliope_neuron_normalizedvolume.git
+	branch = master

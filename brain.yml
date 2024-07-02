@@ -1,0 +1,116 @@
+---
+
+  - includes:
+        - brains/datetime-info.yml
+        - brains/datetime-timer.yml
+        - brains/hal9000-restart.yml
+        - brains/hal9000-shutdown.yml
+        - brains/hal9000-welcome.yml
+
+
+  - name: "hal9000-on-start"
+    signals:
+      - hal9000:
+          broker_ip: "127.0.0.1"
+          topic: "hal9000/event/kalliope/status"
+    neurons:
+      - mqtt_publisher:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_publisher"
+          topic: "hal9000/event/kalliope/status"
+          payload: "ready"
+          kalliope_memory:
+            kalliope_status: "ready"
+
+
+  - name: "hal9000-on-waiting-for-trigger"
+    signals: []
+    neurons:
+      - mqtt_publisher:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_publisher"
+          topic: "hal9000/event/kalliope/status"
+          payload: "waiting"
+          kalliope_memory:
+            kalliope_status: "waiting"
+
+
+  - name: "hal9000-on-start-listening"
+    signals: []
+    neurons:
+      - play:
+          filename: "resources/data/audio/dong.wav"
+      - mqtt_publisher:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_publisher"
+          topic: "hal9000/event/kalliope/status"
+          payload: "listening"
+          kalliope_memory:
+            kalliope_status: "listening"
+
+
+  - name: "hal9000-on-stop-listening"
+    signals: []
+    neurons:
+      - mqtt_publisher:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_publisher"
+          topic: "hal9000/event/kalliope/status"
+          payload: "thinking"
+          kalliope_memory:
+            kalliope_status: "thinking"
+
+
+  - name: "hal9000-on-start-speaking"
+    signals: []
+    neurons:
+      - mqtt_publisher:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_publisher"
+          topic: "hal9000/event/kalliope/status"
+          payload: "speaking"
+          kalliope_memory:
+            kalliope_status: "speaking"
+
+
+  - name: "hal9000-on-stt-error"
+    signals: []
+    neurons:
+      - play:
+          filename: "resources/data/audio/es-tut-mir-leid-es-gab-einen-fehler-in-der-ae35-einheit.wav"
+
+
+  - name: "hal9000-on-order-not-found"
+    signals: []
+    neurons:
+      - play:
+          filename: "resources/data/audio/es-tut-mir-leid-ich-habe-das-nicht-verstanden.wav"
+
+
+  - name: "hal9000-command-status"
+    signals:
+      - mqtt_subscriber:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_subscriber"
+          topic: "hal9000/command/kalliope/status"
+    neurons:
+      - mqtt_publisher:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_publisher"
+          topic: "hal9000/event/kalliope/status"
+          payload: "{{ kalliope_memory['kalliope_status'] }}"
+
+
+  - name: "hal9000-command-volume"
+    signals:
+      - mqtt_subscriber:
+          broker_ip: "127.0.0.1"
+          client_id: "kalliope:neuron:mqtt_subscriber"
+          topic: "hal9000/command/kalliope/volume"
+          is_json: true
+    neurons:
+      - normalizedvolume:
+          action: "set"
+          level: "{{ mqtt_subscriber_message['level'] }}"
+          mute: true
+
