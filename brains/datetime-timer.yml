@@ -5,15 +5,16 @@
       - order: "mach eine erinnerung für in {{timer_minutes}} minuten"
     neurons:
       - neurotimer:
-          minutes: "{{timer_minutes}}"
+          minutes: "{{ numbers[timer_minutes] }}"
           synapse: "datetime-timer-finished"
+          forwarded_parameters:
+            timer_minutes: "{{timer_minutes}}"
       - say:
           message: "ich werde mich in {{timer_minutes}} minuten melden"
 
   - name: "datetime-timer-finished"
-    signals:
-      - order: ""
+    signals: []
     neurons:
       - say:
-          message: "die {{timer_minutes}} minuten sind abgelaufen"
+          message: "erinnerung: die {{timer_minutes}} minuten sind abgelaufen"
 
