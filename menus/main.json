@@ -1,0 +1,8 @@
+{ "id": "main", "text": "Hauptmenu",
+  "items": [ {"id": "help",          "text": "Hilfe",        "actions": [{"handler": "signal", "data": {"plugin": "frontend", "signal": {"gui": {"screen": {"name": "qrcode", "parameter": {"title": "Hilfe", "url": "https://github.com/juergenpabel/HAL9000-demo-de_DE/wiki/Einführung", "hint": "Klicken zum schliessen"}}}}}}]},
+             {"id": "voice-command", "text": "Sprachbefehl", "actions": [{"handler": "signal", "data": {"plugin": "mqtt", "signal": {"topic": "kalliope/trigger/mqtt/event", "payload": "trigger"}}}]},
+             {"id": "services",      "text": "Services",     "actions": [{"handler": "menu",   "data": {"loader": "file", "file": "services.json"}}]},
+             {"id": "system",        "text": "System",       "actions": [{"handler": "menu",   "data": {"loader": "file", "file": "system.json"}}]},
+             {"id": "exit",          "text": ">Abbrechen<",  "actions": [{"handler": "signal", "data": {"plugin": "frontend", "signal": {"gui": {"screen": {"name": "idle", "parameter": {}}}}}}]}
+           ]
+}
